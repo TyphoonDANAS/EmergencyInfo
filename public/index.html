@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>우리 동네 응급맵</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles/style.css" />
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=your_api_key&libraries=services"></script>
+</head>
+<body class="bg-gray-100 min-h-screen p-8 font-['Noto_Sans_KR']">
+
+  <!-- ✅ 로그인 영역 -->
+  <div class="flex justify-end mb-4">
+    <div id="login-area"></div>
+  </div>
+
+  <div class="max-w-[1440px] mx-auto bg-white rounded-xl shadow-xl p-10">
+    <h1 class="text-3xl font-bold text-center mb-10">응급 지원 시스템</h1>
+
+    <!-- 지도 -->
+    <div id="map" class="mb-12 shadow border border-gray-300 rounded-xl h-[500px]"></div>
+
+    <!-- 버튼들 -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <button id="usage-btn" class="bg-gray-50 hover:bg-gray-100 border border-gray-300 rounded-xl p-6 text-xl font-semibold shadow-sm hover:shadow-md transition active:scale-95">
+        응급실<br>사용 현황
+      </button>
+      <button id="find-hospital-btn" class="bg-gray-50 hover:bg-gray-100 border border-gray-300 rounded-xl p-6 text-xl font-semibold shadow-sm hover:shadow-md transition active:scale-95">
+        가까운<br>응급실 찾기
+      </button>
+      <button id="firstaid-btn" class="bg-gray-50 hover:bg-gray-100 border border-gray-300 rounded-xl p-6 text-xl font-semibold shadow-sm hover:shadow-md transition active:scale-95">
+        응급처치술
+      </button>
+      <button id="injury-scan-btn" class="bg-gray-50 hover:bg-gray-100 border border-gray-300 rounded-xl p-6 text-xl font-semibold shadow-sm hover:shadow-md transition active:scale-95">
+        실시간<br>부상 스캔 (AR)
+      </button>
+      <button id="voicechat-btn" class="bg-gray-50 hover:bg-gray-100 border border-gray-300 rounded-xl p-6 text-xl font-semibold shadow-sm hover:shadow-md transition active:scale-95">
+        음성 챗봇
+      </button>
+      <button id="support-btn" class="bg-gray-50 hover:bg-gray-100 border border-gray-300 rounded-xl p-6 text-xl font-semibold shadow-sm hover:shadow-md transition active:scale-95">
+        고객센터
+      </button>
+    </div>
+  </div>
+
+  <!-- 응급처치술 모달 -->
+  <div id="firstaid-modal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden z-50">
+    <div class="bg-white rounded-lg shadow-lg p-8 max-w-lg max-h-[80vh] overflow-y-auto relative">
+      <button id="close-firstaid-btn" class="absolute top-4 right-4 text-gray-700 hover:text-gray-900 text-2xl font-bold">&times;</button>
+      <h2 class="text-2xl font-bold mb-4">응급처치술 안내</h2>
+      <div id="firstaid-content" class="text-gray-800 leading-relaxed whitespace-pre-wrap">
+        <!-- 서버에서 불러온 응급처치술 내용이 여기 표시됩니다 -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 응급실 사용 현황 모달 -->
+  <div id="status-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden justify-center items-center z-50">
+    <div class="bg-white rounded-xl p-6 w-[90%] max-w-3xl max-h-[80vh] overflow-y-auto relative shadow-lg">
+      <button id="close-status-btn" class="absolute top-4 right-4 text-2xl font-bold text-gray-700 hover:text-black">&times;</button>
+      <h2 class="text-2xl font-bold mb-4">응급실 사용 현황</h2>
+      <div id="status-content" class="space-y-4"></div>
+    </div>
+  </div>
+
+  <!-- 🧠 map.js에는 로그인 UI 자동 제어 코드 포함 -->
+  <script src="scripts/map.js"></script>
+  <script src="scripts/chat.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.13.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/body-pix"></script>
+  <script type="module" src="scripts/injuryScan.js"></script>
+  <!-- TensorFlow.js -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.18.0/dist/tf.min.js"></script>
+
+</body>
+</html>

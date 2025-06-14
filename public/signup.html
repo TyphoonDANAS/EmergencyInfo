@@ -1,0 +1,21 @@
+<!-- 📄 public/signup.html -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>회원가입</title>
+  <script defer src="/scripts/auth.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+  <form id="signup-form" class="bg-white p-6 rounded shadow-md w-80">
+    <h2 class="text-xl font-bold mb-4">회원가입</h2>
+    <input type="text" id="userId" placeholder="아이디" required class="mb-2 w-full p-2 border" />
+    <input type="password" id="password" placeholder="비밀번호" required class="mb-2 w-full p-2 border" />
+    <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded">가입하기</button>
+    <p class="text-sm mt-2 text-center">
+      이미 계정이 있으신가요? <a href="/login.html" class="text-blue-500">로그인</a>
+    </p>
+  </form>
+</body>
+</html>
