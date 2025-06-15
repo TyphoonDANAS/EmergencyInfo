@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>관리자 페이지</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-900">
+
+  <header class="bg-white shadow p-4 flex justify-between items-center">
+    <h1 class="text-2xl font-bold">👩‍⚕️ 관리자 페이지</h1>
+    <div id="login-area"></div>
+  </header>
+
+  <main class="max-w-2xl mx-auto mt-10 bg-white p-6 rounded shadow">
+    <h2 class="text-xl font-semibold mb-4">회원 목록 및 권한 관리</h2>
+    <div id="user-list" class="space-y-2">
+      <p>로딩 중...</p>
+    </div>
+  </main>
+
+  <script src="/scripts/admin.js"></script>
+  <script>
+    // 로그인 UI 표시
+    const loginArea = document.getElementById('login-area');
+    const token = localStorage.getItem('token');
+    const userId = localStorage.getItem('userId');
+
+    if (token && userId) {
+      loginArea.innerHTML = `<button id="user-button" class="bg-green-600 text-white px-4 py-2 rounded shadow hover:bg-green-700">${userId}</button>`;
+      document.getElementById('user-button').onclick = () => {
+        if (confirm('로그아웃하시겠습니까?')) {
+          localStorage.removeItem('token');
+          localStorage.removeItem('userId');
+          location.href = '/';
+        }
+      };
+    } else {
+      loginArea.innerHTML = `<a href="/login.html" class="bg-blue-600 text-white px-4 py-2 rounded shadow hover:bg-blue-700">로그인</a>`;
+    }
+  </script>
+</body>
+</html>
